@@ -56,8 +56,6 @@ function showPopUp() {
             },
             data: formData
         }).then(function (res) {
-            // console.log(res);
-            // imgPreview.src = res.data.secure_url;
             NewPost.img = res.data.secure_url;
         }).catch(function (err) {
             console.log(err);
@@ -103,7 +101,7 @@ function addToPost() {
     NewPost.Desc = postDesc.value;
 
     NewPost.date = date;
-    // console.log(NewPost);
+    console.log(NewPost);
 
     // Post.push(NewPost);
     // console.log(Post);

@@ -65,13 +65,6 @@
     <div id="feed-list" class="feeds">
       <h1>Feeds</h1>
       <!--  -->
-      <div class="card mt-3" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
     </div>
 
   </div>
@@ -88,6 +81,39 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
+
+fetch(`https://harbour-api.herokuapp.com/user_details`)
+    .then(res => res.json())
+    .then(data => {
+      let posts = [];
+      data.forEach(element => {
+        element.post.forEach(elem => {
+          posts.push(elem);
+          
+        });
+      });
+      posts.forEach(elem => {
+        let postCard = document.createElement('div');
+          postCard.className = "popup";
+          postCard.innerHTML = `
+            <div  class="card mt-3" style="width: 20rem;">
+            <h5 class="card-title my-3" style="text-align:center">${elem.place}</h5>
+            <p>${elem.data}</p>
+            <div class="card-body">
+              <img src="${elem.img}" id="img-preview"  style="width:16rem"/>
+              <p>${elem.Desc}</p>
+              
+            <a href="#" class="btn btn-primary" id=like">Like</a>
+            </div>
+            </div>
+            `
+
+            document.getElementById('feed-list').append(postCard);
+      });
+      console.log(posts);
+    });
+
+
   function dummy(){
     Cookies.remove('Harbour_auth')
     window.location = '../index.html';
